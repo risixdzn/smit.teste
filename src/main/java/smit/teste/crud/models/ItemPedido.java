@@ -19,7 +19,7 @@ public class ItemPedido {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "pedido_id")
-    private ItemPedido pedido;
+    private Pedido pedido;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "produto_id")

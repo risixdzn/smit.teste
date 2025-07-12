@@ -14,7 +14,7 @@ public class SwaggerConfig {
     @Bean
     OpenAPI customOpenAPI() {
         List<Tag> tags = List.of(
-                new Tag().name("Products").description("Manage the products in the system.")
+                new Tag().name("Produtos").description("Gerencie os produtos do sistema.")
         );
 
         return new OpenAPI().info(new Info().title("Crud API").version("1.0")).tags(tags);
