@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/products")
 @Tag(name = "Products")
-public class ProductController {
+public class ProdutoController {
     @GetMapping
     public ResponseEntity<String> getAllProducts() {
         return ResponseEntity.status(HttpStatus.OK).body("OK");
