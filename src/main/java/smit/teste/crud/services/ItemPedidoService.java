@@ -7,7 +7,6 @@ import smit.teste.crud.repositories.ItemPedidoRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class ItemPedidoService {
         return itemPedidoRepository.findAll();
     }
 
-    public Optional<ItemPedido> buscarPorId(UUID id) {
+    public Optional<ItemPedido> buscarPorId(Integer id) {
         return itemPedidoRepository.findById(id);
     }
 
@@ -26,7 +25,7 @@ public class ItemPedidoService {
         return itemPedidoRepository.save(itemPedido);
     }
 
-    public void deletar(UUID id) {
+    public void deletar(Integer id) {
         itemPedidoRepository.deleteById(id);
     }
 }

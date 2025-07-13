@@ -13,7 +13,6 @@ import smit.teste.crud.utils.PedidoMapper;
 
 import java.net.URI;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -47,7 +46,7 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PedidoResponseDTO> buscarPorId(@PathVariable UUID id) {
+    public ResponseEntity<PedidoResponseDTO> buscarPorId(@PathVariable Integer id) {
         return pedidoService.buscarPorId(id)
                 .map(pedidoMapper::toDTO)
                 .map(ResponseEntity::ok)
@@ -55,7 +54,7 @@ public class PedidoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable UUID id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         if (pedidoService.buscarPorId(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }

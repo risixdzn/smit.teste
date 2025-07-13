@@ -7,7 +7,6 @@ import smit.teste.crud.repositories.ProdutoRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
-    public Optional<Produto> buscarPorId(UUID id) {
+    public Optional<Produto> buscarPorId(Integer id) {
         return produtoRepository.findById(id);
     }
 
@@ -26,7 +25,7 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
 
-    public void deletar(UUID id) {
+    public void deletar(Integer id) {
         produtoRepository.deleteById(id);
     }
 }

@@ -13,7 +13,6 @@ import smit.teste.crud.utils.ProdutoMapper;
 
 import java.net.URI;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/produtos")
@@ -31,7 +30,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> buscarPorId(@PathVariable UUID id) {
+    public ResponseEntity<Produto> buscarPorId(@PathVariable Integer id) {
         return produtoService.buscarPorId(id)
                 .map(produto -> ResponseEntity.ok(produto))
                 .orElse(ResponseEntity.notFound().build());
@@ -48,7 +47,7 @@ public class ProdutoController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Produto> atualizarParcialmente(
-            @PathVariable UUID id,
+            @PathVariable Integer id,
             @Valid @RequestBody ProdutoUpdateDTO dto) {
 
         return produtoService.buscarPorId(id)
@@ -61,7 +60,7 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable UUID id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         if (produtoService.buscarPorId(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }

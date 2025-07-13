@@ -26,17 +26,17 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
-    public Optional<Pedido> buscarPorId(UUID id) {
+    public Optional<Pedido> buscarPorId(Integer id) {
         return pedidoRepository.findById(id);
     }
 
-    public void deletar(UUID id) {
+    public void deletar(Integer id) {
         pedidoRepository.deleteById(id);
     }
 
     @Transactional
     public Pedido criarPedido(PedidoCreateDTO dto) {
-        Map<UUID, Produto> produtosMap = carregarProdutos(dto);
+        Map<Integer, Produto> produtosMap = carregarProdutos(dto);
 
         // Verificar estoque
         for (ItemPedidoCreateDTO itemDto : dto.itens()) {
@@ -72,14 +72,14 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
     }
 
-    private Map<UUID, Produto> carregarProdutos(PedidoCreateDTO dto) {
-        Set<UUID> ids = dto.itens().stream()
+    private Map<Integer, Produto> carregarProdutos(PedidoCreateDTO dto) {
+        Set<Integer> ids = dto.itens().stream()
                 .map(ItemPedidoCreateDTO::produtoId)
                 .collect(Collectors.toSet());
 
         List<Produto> produtos = produtoRepository.findAllById(ids);
 
-        Map<UUID, Produto> map = new HashMap<>();
+        Map<Integer, Produto> map = new HashMap<>();
         for (Produto p : produtos) {
             map.put(p.getId(), p);
         }
