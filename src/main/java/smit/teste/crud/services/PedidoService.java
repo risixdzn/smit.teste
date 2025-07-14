@@ -38,7 +38,7 @@ public class PedidoService {
     public Pedido criarPedido(PedidoCreateDTO dto) {
         Map<Integer, Produto> produtosMap = carregarProdutos(dto);
 
-        // Verificar estoque
+        /* Verifica se os produtos existem e têm estoque suficiente */
         for (ItemPedidoCreateDTO itemDto : dto.itens()) {
             Produto produto = produtosMap.get(itemDto.produtoId());
             if (produto == null) {
@@ -49,7 +49,6 @@ public class PedidoService {
             }
         }
 
-        // Criar pedido e itens
         Pedido pedido = new Pedido();
         pedido.setData(LocalDateTime.now());
         List<ItemPedido> itens = new ArrayList<>();
@@ -57,9 +56,10 @@ public class PedidoService {
         for (ItemPedidoCreateDTO itemDto : dto.itens()) {
             Produto produto = produtosMap.get(itemDto.produtoId());
 
-            // Atualiza estoque
+            /* Atualiza o estoque do produto */
             produto.setQuantidadeEmEstoque(produto.getQuantidadeEmEstoque() - itemDto.quantidade());
 
+            /* Cria o item do pedido */
             ItemPedido item = new ItemPedido();
             item.setPedido(pedido);
             item.setProduto(produto);
@@ -72,6 +72,8 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
     }
 
+    /* Obtém os produtos de um pedido para acesso por ID
+    * (utilizado para verificar se os produtos existem antes de criar um pedido) */
     private Map<Integer, Produto> carregarProdutos(PedidoCreateDTO dto) {
         Set<Integer> ids = dto.itens().stream()
                 .map(ItemPedidoCreateDTO::produtoId)
