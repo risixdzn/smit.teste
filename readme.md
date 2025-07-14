@@ -43,20 +43,7 @@ mv .env.example .env
 docker-compose up -d
 ```
 
-4. Configure a conexão em `application.yml` ou via variáveis de ambiente:
-
-```yaml
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/${DB_DATABASE}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
-  jpa:
-    hibernate:
-      ddl-auto: update
-```
-
-5. Compile e execute a aplicação:
+4. Compile e execute a aplicação:
 
 ```bash
 mvn spring-boot:run
@@ -64,7 +51,7 @@ mvn spring-boot:run
 ./mvnw spring-boot:run
 ```
 
-• Na IDE (JetBrains): selecione a classe `CrudApplication` e clique em ▶️ Run, ou use a configuração Maven "
+- Na IDE (JetBrains): selecione a classe `CrudApplication` e clique em ▶️ Run, ou use a configuração Maven "
 spring-boot\:run".
 
 A API estará disponível em `http://localhost:8080`.
